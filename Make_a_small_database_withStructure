@@ -1,0 +1,29 @@
+At beginner level (Matlab in this case), you will put all data from one cell into one dimmension vector, for example, the response under different conditions. However, this is not very efficient way of organing data
+A better way is to use structure, which will be a 2D spreadsheet like file. Here is an example:
+
+Old ways of organization of cells (each column is a cell)
+1:1200: intensity, spont
+1201:3840: intensity, ori
+3841:5040:dff, spont
+5041:7680:dff,ori
+7681:8880: spont pup Norm
+8881:11520: ori, pupNormed
+
+
+New way of organization using this code:
+
+ROI_list=[];
+target=allCT_corrected;
+
+
+for i=1:size(target,2)
+  ROI_list(i).mousenumber=target(12247,i);
+  ROI_list(i).depth=target(12246,i);
+  ROI_list(i).spont_intensity=target(1:1200,i);
+  ROI_list(i).ori_intensity=target(1201:4080,i);
+  ROI_list(i).spont_dff=target(4081:5280,i);
+  ROI_list(i).ori_dff=target(5281:8160,i);
+  ROI_list(i).spont_pup=target(8161:9360,i);
+  ROI_list(i).spont_pup=target(9361:12240,i);
+end
+
